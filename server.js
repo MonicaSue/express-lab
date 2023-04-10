@@ -1,13 +1,14 @@
 // import modules
 
 import express from 'express'
+import { students } from './data/student-data.js'
 
 // create Express app
 
 const app = express()
 
 // configure the app (app.set)
-
+app.set('view engine', 'ejs')
 
 
 // mount Middleware (app.use)
@@ -15,7 +16,15 @@ const app = express()
 
 
 // mount routes
+app.get('/', function(req, res) {
+  res.redirect('/students')
+})
 
+app.get('/students', function(req, res) {
+  res.render('students/index', {
+    students: students
+  })
+})
 
 
 // tell the app to listen on port 3000
